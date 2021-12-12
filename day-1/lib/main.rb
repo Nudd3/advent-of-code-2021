@@ -1,16 +1,11 @@
 # frozen_string_literal: false
 
-lines = []
-File.open('input.txt').readlines.each do |line|
-  lines << line.chomp.to_i
-end
+# Advent of Code 2021: Day 1
 
-increase_counter = 0
+input = File.read('input.txt').split("\n").map(&:to_i)
 
-lines.each_with_index do |value, index|
-  next if index.zero?
+# Take two elements at a time and see if the latter one is larger than the first. Count how many time that happens
+puts(input.each_cons(2).count { |a, b| b > a })
 
-  increase_counter += 1 if value > lines[index - 1]
-end
-
-puts increase_counter
+# Take three elements and calculate the sum out of them. Do that two times and compare the result. Count how many times that happens
+puts(input.each_cons(3).map(&:sum).each_cons(2).count { |a, b| b > a })
