@@ -2,9 +2,19 @@
 
 input = File.read('input.txt').split("\n")
 
-a = {'up' => 0, 'down' => 0, 'forward' => 0}
+horizontal = 0
+depth = 0
 input.each do |element|
-  a[element.split(' ')[0]] += element.split(' ')[1].to_i
+  command = element.split(' ')
+  case command[0]
+  when 'forward' then horizontal += command[1].to_i
+  when 'down' then depth += command[1].to_i
+  else depth -= command[1].to_i
+  end
 end
 
-puts a['forward'] * (a['down'] - a['up'])
+puts "Horizontal: #{horizontal}"
+puts "Depth: #{depth}"
+puts horizontal * depth
+
+# Part 1: 1762050
