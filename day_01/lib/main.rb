@@ -13,7 +13,7 @@ ctr = 0
 end
 
 puts "part 1 #{ctr}"
-# a.combin  ation(2) {|combination| p combination }
+
 # part 2
 ctr2 = 0
 prev = 0
@@ -26,4 +26,5 @@ prev = 0
 end
 
 # Need to reduce the result by 1. Since prev is initialized to 0
+# the first check will always be true
 puts "part 2 #{ctr2 - 1}"
