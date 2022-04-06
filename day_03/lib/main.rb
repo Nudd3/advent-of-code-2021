@@ -37,12 +37,7 @@ end
 puts "power consumption: #{gamma.to_i(2) * epsilon.to_i(2)}"
 
 # Part 2
-# Oxygen generator rating:
-# Look over all values. Always save the numbers with the most
-# CO2 scrubber rating:
-# Always save the least
 
-# Works
 def oxygen(array)
   index = 0
   a = []
@@ -65,23 +60,17 @@ def co2(array)
 end
 
 def count(array, index, type)
-  saved = []
   ones = 0
   zeroes = 0
 
-  array.each do |number|
-    number[index] == '1' ? ones += 1 : zeroes += 1
+  array.each { |number| number[index] == '1' ? ones += 1 : zeroes += 1 }
+
+  flag = case type
+  when 'oxygen' then ones >= zeroes ? '1' : '0'
+  else ones >= zeroes ? '0' : '1'
   end
 
-  if type == 'oxygen'
-    flag = ones >= zeroes ? '1' : '0'
-  else
-    flag = ones >= zeroes ? '0' : '1'
-  end
-  array.each do |number|
-    saved << number if number[index] == flag
-  end
-  saved
+  array.select { |number| number if number[index] == flag }
 end
 
 puts "oxygen: #{oxygen(array).to_i(2)}"
