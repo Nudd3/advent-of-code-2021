@@ -35,3 +35,55 @@ ctr.each do |val|
 end
 
 puts "power consumption: #{gamma.to_i(2) * epsilon.to_i(2)}"
+
+# Part 2
+# Oxygen generator rating:
+# Look over all values. Always save the numbers with the most
+# CO2 scrubber rating:
+# Always save the least
+
+# Works
+def oxygen(array)
+  index = 0
+  a = []
+  until a.size == 1
+    a = index.zero? ? count(array, index, 'oxygen') : count(a, index, 'oxygen')
+    index += 1
+  end
+
+  a.join
+end
+
+def co2(array)
+  index = 0
+  a = []
+  until a.size == 1
+    a = index.zero? ? count(array, index, 'co2') : count(a, index, 'co2')
+    index += 1
+  end
+  a.join
+end
+
+def count(array, index, type)
+  saved = []
+  ones = 0
+  zeroes = 0
+
+  array.each do |number|
+    number[index] == '1' ? ones += 1 : zeroes += 1
+  end
+
+  if type == 'oxygen'
+    flag = ones >= zeroes ? '1' : '0'
+  else
+    flag = ones >= zeroes ? '0' : '1'
+  end
+  array.each do |number|
+    saved << number if number[index] == flag
+  end
+  saved
+end
+
+puts "oxygen: #{oxygen(array).to_i(2)}"
+puts "co2: #{co2(array).to_i(2)}"
+puts "life support rating: #{oxygen(array).to_i(2) * co2(array).to_i(2)}"
