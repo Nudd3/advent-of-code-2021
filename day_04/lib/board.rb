@@ -2,21 +2,8 @@
 
 # board class
 class Board
-  def initialize
-    @board = create_board('../input/test_input.txt')
-  end
-
-  def create_board(file)
-    matrix = Array.new(5)
-    ai = 0
-    File.open(file).readlines.each_with_index do |line, index|
-      next if index.zero? || line.strip.empty?
-
-      matrix[ai] = line.split.map(&:to_i)
-      ai += 1
-      break if ai == 5
-    end
-    matrix
+  def initialize(array)
+    @board = array
   end
 
   def check_number(number)
@@ -34,8 +21,12 @@ class Board
     false
   end
 
-  def print_board
-    @board.to_a.each { |r| puts r.inspect }
+  def to_s
+    str = ''
+    @board.each do |row|
+      str << "#{row}\n"
+    end
+    str
   end
 end
 
