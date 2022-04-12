@@ -20,9 +20,7 @@ class Bingo
   end
 
   def play_part_one
-    index = 0
     @numbers.each do |number|
-      index += 1
       @boards.each do |board|
         board.check_number(number)
         return { board: board, number: number } if board.bingo?
@@ -30,8 +28,25 @@ class Bingo
     end
   end
 
+  def play_part_two
+    @numbers.each do |number|
+      @boards.each do |board|
+        board.check_number(number)
+        if board.bingo?
+          if @boards.length == 1
+            return { board: board, number: number }
+          else
+            @boards.delete(board)
+          end
+        end
+      end
+    end
+  end
+
+  private
+
   def read_numbers
-    numbers = File.open('../input/input.txt', &:readline)
+    numbers = File.open('../input/test_input.txt', &:readline)
     numbers.strip.split(',').map(&:to_i)
   end
 
@@ -39,7 +54,7 @@ class Bingo
   def read_boards
     boards = []
     temp = []
-    File.open('../input/input.txt').readlines.each_with_index do |line, index|
+    File.open('../input/test_input.txt').readlines.each_with_index do |line, index|
       next if index.zero? || index == 1
 
       if line.strip.empty?
