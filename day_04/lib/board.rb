@@ -33,4 +33,3 @@ class Board
     str
   end
 end
-

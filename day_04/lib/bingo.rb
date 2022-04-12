@@ -15,16 +15,17 @@ class Bingo
   def initialize
     @numbers = read_numbers
     @boards = read_boards
+    # Below variable/s are used in part two
+    @winners = 0
   end
 
-  def play
-    # Play
+  def play_part_one
     index = 0
     @numbers.each do |number|
       index += 1
       @boards.each do |board|
         board.check_number(number)
-        return {board: board, number: number} if board.bingo?
+        return { board: board, number: number } if board.bingo?
       end
     end
   end
@@ -53,13 +54,3 @@ class Bingo
   end
 end
 # rubocop:enable Metrics/MethodLength
-
-b = Bingo.new
-winner = b.play
-
-winning_board = winner[:board]
-winning_number = winner[:number]
-
-# b = a.select { |v| v.is_a? Integer }.sum
-sum = winning_board.board_sum
-puts sum * winning_number
