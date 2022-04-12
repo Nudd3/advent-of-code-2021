@@ -21,6 +21,10 @@ class Board
     false
   end
 
+  def board_sum
+    @board.flatten.select { |v| v.is_a? Integer }.sum
+  end
+
   def to_s
     str = ''
     @board.each do |row|
