@@ -1,5 +1,6 @@
 # frozen_string_literal: false
 
+# board class
 class Board
   def initialize
     @board = create_board('../input/test_input.txt')
@@ -21,9 +22,7 @@ class Board
   def check_number(number)
     @board.each_with_index do |row, i|
       row.each_index do |j|
-        if @board[i][j] == number
-          @board[i][j] = 'X'
-        end
+        @board[i][j] = 'X' if @board[i][j] == number
       end
     end
   end
@@ -40,13 +39,3 @@ class Board
   end
 end
 
-b = Board.new
-b.print_board
-b.check_number(13)
-b.check_number(22)
-b.check_number(17)
-b.check_number(11)
-
-puts "\n\n"
-b.print_board
-puts "bingo? #{b.bingo?}"
