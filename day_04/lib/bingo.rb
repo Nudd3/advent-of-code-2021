@@ -24,9 +24,18 @@ class Bingo
   end
 
   def read_boards
+    boards = [], temp = []
+    File.open('../input/test_input.txt').readlines.each_with_index do |line, index|
+      next if index.zero?
 
+      if line.strip.empty?
+        boards << Board.new(temp)
+        temp = []
+      end
+      temp << line.split.map(&:to_i)
+    end
+    boards
   end
-
 end
 
 b = Bingo.new
